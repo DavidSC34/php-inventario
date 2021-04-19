@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $ins = $con->query("INSERT INTO  inventario  VALUES (DEFAULT,'$producto','$precio','$cantidad',NULL)");
 
 
+    //CONSULTA  PREPARADA
+
 
     if ($ins) {
         echo "guarda";

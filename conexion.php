@@ -1,2 +1,2 @@
 <?php
-$con = new mysqli('localhost', 'root', 'root', 'crud');
+// $con = new mysqli('localhost', 'root', 'root', 'crud');
