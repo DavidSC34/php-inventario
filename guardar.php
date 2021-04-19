@@ -8,8 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cantidad = $con->real_escape_string(htmlentities($_POST['cantidad']));
     $categoria = $con->real_escape_string(htmlentities($_POST['categoria']));
 
+    $id = '';
+
     //forma completa
-    $ins = $con->query("INSERT INTO  inventario (id,producto,precio,cantidad) VALUES (DEFAULT,'$producto','$precio','$cantidad')");
+    //$ins = $con->query("INSERT INTO  inventario (id,producto,precio,cantidad) VALUES (DEFAULT,'$producto','$precio','$cantidad')");
 
     //FORMA CORTA
 
@@ -17,14 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     //CONSULTA  PREPARADA
+   $ins = $con->prepare("INSERT INTO inventario VALUES (?,?,?,?,?) ");
+   $ins->bind_param('isdis',$id,$producto,$precio,$cantidad,$categoria);//tipo de dato, variables con el dato
 
-
-    if ($ins) {
-        echo "guarda";
+    if ($ins->execute()) {
+        header("location:index.php");
     } else {
 
         echo "no guardo";
     }
+
+    //optimizar con la conexion 
+    $ins->close();
+    $con->close();
 } else {
     header("location:index.php");
 }
